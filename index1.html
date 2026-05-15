@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fit-Life | Premium Fitness Club</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;700;800;900&family=Rubik:wght@400;500;800&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    /* =============================================
+       CSS CUSTOM PROPERTIES
+    ============================================= */
+    :root {
+      --clr-primary:    #f0b90b;
+      --clr-secondary:  #e5393a;
+      --clr-dark:       #111111;
+      --clr-dark-2:     #1a1a1a;
+      --clr-light:      #f5f5f5;
+      --clr-white:      #ffffff;
+      --clr-text:       #777777;
+
+      --ff-heading: 'Catamaran', sans-serif;
+      --ff-body:    'Rubik', sans-serif;
+
+      --fs-1: clamp(2rem,   5vw, 3.5rem);
+      --fs-2: clamp(1.5rem, 3vw, 2.25rem);
+      --fs-3: 1.25rem;
+      --fs-4: 1rem;
+      --fs-5: 0.875rem;
+
+      --fw-regular: 400;
+      --fw-medium:  500;
+      --fw-bold:    700;
+      --fw-black:   900;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+
+      --shadow-sm: 0 2px 8px rgba(0,0,0,.12);
+      --shadow-md: 0 4px 20px rgba(0,0,0,.18);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,.24);
+
+      --transition: 0.25s ease;
+      --container-max: 1200px;
+      --container-pad: clamp(1rem, 5vw, 2rem);
+      --header-height: 72px;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+
+    body {
+      font-family: var(--ff-body);
+      font-size: var(--fs-4);
+      font-weight: var(--fw-regular);
+      color: var(--clr-text);
+      background-color: var(--clr-white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    address { font-style: normal; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .container {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--container-pad);
+    }
+
+    .section { padding-block: clamp(3rem, 8vw, 6rem); }
+
+    .section-subtitle {
+      font-size: var(--fs-5);
+      font-weight: var(--fw-medium);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--clr-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-black);
+      color: var(--clr-dark);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title.light { color: var(--clr-white); }
+    .text-center { text-align: center; }
+
+    .section-text { color: var(--clr-text); margin-bottom: 1rem; max-width: 60ch; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-5);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+    }
+    .btn-primary:hover { background-color: #d4a209; }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--clr-white);
+      border: 2px solid var(--clr-primary);
+    }
+    .btn-secondary:hover {
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: var(--fw-medium);
+      color: var(--clr-primary);
+      font-size: var(--fs-5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: gap var(--transition);
+    }
+    .btn-link::after {
+      content: '→';
+      transition: transform var(--transition);
+    }
+    .btn-link:hover { gap: 0.75rem; }
+    .btn-link:hover::after { transform: translateX(4px); }
+
+    /* Scrollbar */
+    .has-scrollbar {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 1.25rem;
+      scroll-snap-type: x mandatory;
+    }
+    .has-scrollbar::-webkit-scrollbar { height: 6px; }
+    .has-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,.1); border-radius: 9999px; }
+    .has-scrollbar::-webkit-scrollbar-thumb { background: var(--clr-primary); border-radius: 9999px; }
+
+    .scrollbar-item { flex-shrink: 0; scroll-snap-align: start; }
+
+    /* Image helpers */
+    .w-100 { width: 100%; }
+    .img-cover { width: 100%; height: 100%; object-fit: cover; }
+    .img-holder { overflow: hidden; }
+
+    /* Dark background sections */
+    .bg-dark {
+      background-color: var(--clr-dark);
+      color: var(--clr-white);
+    }
+    .bg-dark .section-text { color: rgba(255,255,255,.7); }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      background-color: var(--clr-dark);
+      box-shadow: var(--shadow-sm);
+      transition: background-color var(--transition), box-shadow var(--transition);
+    }
+
+    .header.scrolled {
+      background-color: rgba(17,17,17,.96);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--clr-white);
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-black);
+      font-size: 1.375rem;
+      letter-spacing: 1px;
+    }
+    .logo ion-icon { color: var(--clr-primary); font-size: 1.6rem; }
+    .logo .accent { color: var(--clr-primary); }
+
+    /* Nav */
+    .navbar-list {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .navbar-link {
+      display: block;
+      padding: 0.4rem 0.75rem;
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,.75);
+      border-radius: var(--radius-sm);
+      transition: color var(--transition), background-color var(--transition);
+    }
+    .navbar-link:hover,
+    .navbar-link.active {
+      color: var(--clr-primary);
+    }
+
+    /* Hamburger / close buttons */
+    .nav-open-btn,
+    .nav-close-btn {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--clr-white);
+      padding: 0.25rem;
+    }
+
+    /* Mobile nav overlay */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,.6);
+      z-index: 99;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .nav-overlay.active { opacity: 1; }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      min-height: 100svh;
+      padding-top: calc(var(--header-height) + 2rem);
+      padding-bottom: clamp(3rem, 8vw, 6rem);
+      background-color: var(--clr-dark);
+      background-image: url('hero-bg.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(17,17,17,.9) 40%, rgba(17,17,17,.4));
+      pointer-events: none;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: var(--fs-5);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 1rem;
+    }
+    .hero-subtitle strong {
+      color: var(--clr-primary);
+      font-weight: var(--fw-black);
+      font-family: var(--ff-heading);
+    }
+
+    .hero-title {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-black);
+      color: var(--clr-white);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-content .section-text { margin-bottom: 2rem; color: rgba(255,255,255,.7); }
+
+    .hero-banner {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .hero-banner img.main { border-radius: var(--radius-lg); }
+
+    /* Floating stat cards */
+    .hero-stat {
+      position: absolute;
+      background-color: var(--clr-white);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-stat:nth-child(2) { bottom: 2rem; left: -1.5rem; animation-delay: 1.5s; }
+    .hero-stat:nth-child(3) { top: 2rem; right: -1rem; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .hero-stat ion-icon {
+      font-size: 1.75rem;
+      color: var(--clr-primary);
+      flex-shrink: 0;
+    }
+
+    .hero-stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--clr-text);
+    }
+    .hero-stat-value {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-black);
+      font-size: 1.1rem;
+      color: var(--clr-dark);
+      line-height: 1;
+    }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    .about .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+
+    .about-banner {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .about-banner img.main { border-radius: var(--radius-lg); }
+
+    .about-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .about-badge-number {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-black);
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .about-badge-text {
+      font-size: 0.7rem;
+      font-weight: var(--fw-medium);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .about-content .section-subtitle { display: block; }
+
+    .about-coach {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .coach-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 3px solid var(--clr-primary);
+    }
+    .coach-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .coach-name {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-bold);
+      color: var(--clr-dark);
+      font-size: 1rem;
+    }
+    .coach-role {
+      font-size: var(--fs-5);
+      color: var(--clr-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .about-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    /* =============================================
+       VIDEO
+    ============================================= */
+    .video { background-color: var(--clr-light); }
+
+    .video-card {
+      position: relative;
+      min-height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      background-image: url('video-banner.jpg');
+      isolation: isolate;
+    }
+
+    .video-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(17,17,17,.85) 30%, rgba(17,17,17,.4));
+      z-index: -1;
+    }
+
+    .video-card-title {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-black);
+      color: var(--clr-white);
+      margin-bottom: 1.5rem;
+    }
+
+    .play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 0 12px rgba(240,185,11,.25), 0 0 0 24px rgba(240,185,11,.1);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .play-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 16px rgba(240,185,11,.3), 0 0 0 32px rgba(240,185,11,.12);
+    }
+
+    /* =============================================
+       CLASSES
+    ============================================= */
+    .classes { background-color: var(--clr-dark); }
+    .classes .section-subtitle { display: block; text-align: center; }
+    .classes .section-title { color: var(--clr-white); margin-bottom: 2.5rem; }
+
+    .class-list { padding-bottom: 1.25rem; }
+    .scrollbar-item { width: clamp(280px, 40vw, 416px); }
+
+    .class-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background-color: var(--clr-dark-2);
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .class-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .class-card .card-banner {
+      aspect-ratio: 416/240;
+      position: relative;
+      overflow: hidden;
+    }
+    .class-card .card-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .class-card:hover .card-banner img { transform: scale(1.05); }
+
+    .class-card .card-content { padding: 1.5rem; }
+
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .title-icon { width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; }
+
+    .class-card .card-title {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-3);
+      color: var(--clr-white);
+      transition: color var(--transition);
+    }
+    .class-card .card-title:hover { color: var(--clr-primary); }
+
+    .class-card .card-text { font-size: var(--fs-5); margin-bottom: 1rem; }
+
+    /* Progress bar */
+    .card-progress { margin-top: auto; }
+
+    .progress-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .progress-label {
+      font-size: var(--fs-5);
+      color: rgba(255,255,255,.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .progress-value {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-bold);
+      color: var(--clr-primary);
+    }
+    .progress-bg {
+      height: 6px;
+      border-radius: 9999px;
+      background-color: rgba(255,255,255,.12);
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--clr-primary), #f7d466);
+      transition: width 1s ease;
+    }
+
+    /* =============================================
+       BLOG
+    ============================================= */
+    .blog { background-color: var(--clr-white); }
+    .blog .section-subtitle { display: block; text-align: center; }
+    .blog .section-title { color: var(--clr-dark); margin-bottom: 2.5rem; }
+
+    .blog-list { gap: 1.5rem; }
+    .blog-list .scrollbar-item { width: clamp(280px, 40vw, 440px); }
+
+    .blog-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background-color: var(--clr-white);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .blog-card .card-banner {
+      aspect-ratio: 440/270;
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-card .card-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .blog-card:hover .card-banner img { transform: scale(1.05); }
+
+    .card-meta {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0.75rem;
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+      font-size: var(--fs-5);
+      font-weight: var(--fw-bold);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .blog-card .card-content { padding: 1.5rem; }
+
+    .blog-card .card-title {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-3);
+      color: var(--clr-dark);
+      margin-bottom: 0.75rem;
+      display: block;
+      line-height: 1.3;
+      transition: color var(--transition);
+    }
+    .blog-card .card-title:hover { color: var(--clr-primary); }
+
+    .blog-card .card-text { font-size: var(--fs-5); margin-bottom: 1.25rem; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer { background-color: var(--clr-dark); color: rgba(255,255,255,.75); }
+
+    .footer-top {
+      padding-block: clamp(3rem, 8vw, 5rem);
+      background-image: url('footer-bg (1).png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .footer-top .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-brand .logo { color: var(--clr-white); margin-bottom: 1rem; }
+
+    .footer-brand-text {
+      font-size: var(--fs-5);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-hours {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .footer-hours img { flex-shrink: 0; margin-top: 2px; }
+    .footer-hours ul { display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-hours-title {
+      font-weight: var(--fw-medium);
+      color: var(--clr-white);
+      font-size: var(--fs-5);
+    }
+    .footer-hours p { font-size: var(--fs-5); }
+
+    .footer-list-title {
+      font-family: var(--ff-heading);
+      font-weight: var(--fw-bold);
+      font-size: 1rem;
+      color: var(--clr-white);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--clr-primary);
+      display: inline-block;
+    }
+
+    .footer-link {
+      display: block;
+      font-size: var(--fs-5);
+      color: rgba(255,255,255,.65);
+      padding: 0.3rem 0;
+      transition: color var(--transition), padding-left var(--transition);
+    }
+    .footer-link:hover { color: var(--clr-primary); padding-left: 6px; }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .footer-contact-item .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.875rem;
+    }
+
+    /* Newsletter form */
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background-color: rgba(255,255,255,.08);
+      border: none;
+      outline: none;
+      color: var(--clr-white);
+      font-family: var(--ff-body);
+      font-size: var(--fs-5);
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,.4); }
+
+    .newsletter-btn {
+      padding: 0.75rem 1rem;
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background-color var(--transition);
+    }
+    .newsletter-btn:hover { background-color: #d4a209; }
+
+    /* Social links */
+    .social-list { display: flex; gap: 0.75rem; }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .social-link:hover {
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+      border-color: var(--clr-primary);
+    }
+
+    /* Footer bottom */
+    .footer-bottom {
+      padding-block: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .footer-bottom .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .copyright { font-size: var(--fs-5); }
+    .copyright-link { color: var(--clr-primary); font-weight: var(--fw-medium); }
+    .copyright-link:hover { text-decoration: underline; }
+
+    .footer-bottom-list { display: flex; gap: 1.5rem; }
+    .footer-bottom-link {
+      font-size: var(--fs-5);
+      color: rgba(255,255,255,.6);
+      transition: color var(--transition);
+    }
+    .footer-bottom-link:hover { color: var(--clr-primary); }
+
+    /* =============================================
+       BACK TO TOP
+    ============================================= */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      z-index: 90;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--clr-primary);
+      color: var(--clr-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .back-to-top:hover { background-color: #d4a209; }
+
+    /* =============================================
+       RESPONSIVE — MOBILE
+    ============================================= */
+    @media (max-width: 768px) {
+      /* Mobile nav */
+      .nav-open-btn  { display: block; }
+      .nav-close-btn { display: flex; align-self: flex-end; margin-bottom: 1rem; }
+
+      .navbar {
+        position: fixed;
+        top: 0; right: 0;
+        width: min(300px, 80vw);
+        height: 100%;
+        background-color: var(--clr-dark-2);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        z-index: 101;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      .navbar.open { transform: translateX(0); }
+
+      .navbar-list { flex-direction: column; align-items: flex-start; gap: 0; }
+      .navbar-link { font-size: 1.1rem; padding: 0.75rem 0.5rem; }
+
+      .nav-overlay { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 100; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
+      .nav-overlay.active { opacity: 1; pointer-events: all; }
+
+      /* Hero: single column */
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero-banner { display: none; }
+      .hero-subtitle { justify-content: center; }
+      .hero-content .section-text { margin-inline: auto; }
+
+      /* About: single column */
+      .about .container { grid-template-columns: 1fr; }
+      .about-actions { justify-content: center; }
+
+      /* Footer */
+      .footer-top .container { grid-template-columns: 1fr; }
+      .footer-bottom .container { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .btn-secondary { display: none; }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!-- =============================================
+       HEADER
+  ============================================= -->
+  <header class="header" id="header">
+    <div class="container">
+
+      <a href="#home" class="logo" aria-label="Fit-Life home">
+        <ion-icon name="barbell-sharp" aria-hidden="true"></ion-icon>
+        <span>Fit<span class="accent">Life</span></span>
+      </a>
+
+      <nav class="navbar" id="navbar" aria-label="Primary navigation">
+        <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu" aria-expanded="true">
+          <ion-icon name="close-sharp" aria-hidden="true"></ion-icon>
+        </button>
+        <ul class="navbar-list">
+          <li><a href="#home"  class="navbar-link active" data-nav-link>Home</a></li>
+          <li><a href="#about" class="navbar-link" data-nav-link>About Us</a></li>
+          <li><a href="#class" class="navbar-link" data-nav-link>Classes</a></li>
+          <li><a href="#blog"  class="navbar-link" data-nav-link>Blog</a></li>
+          <li><a href="#contact" class="navbar-link" data-nav-link>Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+      <a href="#contact" class="btn btn-secondary">Join Now</a>
+
+      <button class="nav-open-btn" id="navOpenBtn" aria-label="Open menu" aria-expanded="false">
+        <ion-icon name="menu-sharp" aria-hidden="true"></ion-icon>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- =============================================
+       MAIN
+  ============================================= -->
+  <main>
+
+    <!-- HERO -->
+    <section class="section hero bg-dark" id="home" aria-label="Hero">
+      <div class="container">
+
+        <div class="hero-content">
+          <p class="hero-subtitle">
+            <strong>The Best</strong>&nbsp; Fitness Club
+          </p>
+          <h1 class="h1 hero-title">Work Hard<br>To Get A Better Life</h1>
+          <p class="section-text">
+            Transform your body and mind with expert trainers, state-of-the-art equipment, and a community that pushes you further every day.
+          </p>
+          <a href="#class" class="btn btn-primary">Explore Classes</a>
+        </div>
+
+        <div class="hero-banner">
+          <img src="hero-banner.png" width="660" height="753" alt="Athlete in training" class="main w-100">
+
+          <!-- Floating stat: heart rate -->
+          <div class="hero-stat">
+            <ion-icon name="heart-sharp" aria-hidden="true"></ion-icon>
+            <div>
+              <p class="hero-stat-label">Heart Rate</p>
+              <p class="hero-stat-value">128 bpm</p>
+            </div>
+          </div>
+
+          <!-- Floating stat: calories -->
+          <div class="hero-stat">
+            <ion-icon name="flame-sharp" aria-hidden="true"></ion-icon>
+            <div>
+              <p class="hero-stat-label">Calories</p>
+              <p class="hero-stat-value">520 kcal</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="about" aria-label="About us">
+      <div class="container">
+
+        <div class="about-banner">
+          <img src="about-banner.png" width="660" height="648" loading="lazy" alt="Gym interior" class="main w-100">
+          <div class="about-badge">
+            <span class="about-badge-number">10+</span>
+            <span class="about-badge-text">Years of<br>Excellence</span>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <p class="section-subtitle">About Us</p>
+          <h2 class="h2 section-title">Welcome To Our Fitness &amp; Sports Gym</h2>
+          <p class="section-text">
+            We believe fitness is more than lifting weights — it's a lifestyle. Our certified trainers craft personalised programmes that help you achieve your goals safely and sustainably.
+          </p>
+          <p class="section-text">
+            Whether you're just starting out or an experienced athlete, our world-class facilities and supportive community are here to help you reach your peak.
+          </p>
+
+          <div class="about-coach">
+            <figure class="coach-avatar">
+              <img src="about-coach.jpg" width="65" height="65" loading="lazy" alt="Coach Denis Robinson">
+            </figure>
+            <div>
+              <p class="coach-name">Denis Robinson</p>
+              <p class="coach-role">Head Coach</p>
+            </div>
+          </div>
+
+          <div class="about-actions">
+            <a href="#class" class="btn btn-primary">Explore Classes</a>
+            <a href="#contact" class="btn-link">Contact Us</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="section video" aria-label="Promo video">
+      <div class="container">
+        <div class="video-card" role="region" aria-label="Video preview">
+          <h2 class="h2 video-card-title">Explore Fitness Life</h2>
+          <button class="play-btn" id="playBtn" aria-label="Play promo video">
+            <ion-icon name="play-sharp" aria-hidden="true"></ion-icon>
+          </button>
+          <a href="#" class="btn-link">Watch More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLASSES -->
+    <section class="section classes bg-dark" id="class" aria-label="Our classes">
+      <div class="container">
+
+        <p class="section-subtitle">Our Classes</p>
+        <h2 class="h2 section-title text-center">Fitness Classes For Every Goal</h2>
+
+        <ul class="class-list has-scrollbar" role="list">
+
+          <li class="scrollbar-item">
+            <article class="class-card">
+              <figure class="card-banner img-holder">
+                <img src="class-1.jpg" width="416" height="240" loading="lazy" alt="Weight Lifting class" class="img-cover">
+              </figure>
+              <div class="card-content">
+                <div class="title-wrapper">
+                  <img src="class-icon-1.png" width="44" height="44" aria-hidden="true" alt="" class="title-icon">
+                  <h3 class="h3"><a href="#" class="card-title">Weight Lifting</a></h3>
+                </div>
+                <p class="card-text">Build raw strength and muscle mass with coach-guided barbell and dumbbell programmes.</p>
+                <div class="card-progress" aria-label="Class capacity: 85%">
+                  <div class="progress-wrapper">
+                    <span class="progress-label">Class Full</span>
+                    <span class="progress-value" aria-hidden="true">85%</span>
+                  </div>
+                  <div class="progress-bg" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 85%"></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          <li class="scrollbar-item">
+            <article class="class-card">
+              <figure class="card-banner img-holder">
+                <img src="class-2.jpg" width="416" height="240" loading="lazy" alt="Cardio & Strength class" class="img-cover">
+              </figure>
+              <div class="card-content">
+                <div class="title-wrapper">
+                  <img src="class-icon-2.png" width="44" height="44" aria-hidden="true" alt="" class="title-icon">
+                  <h3 class="h3"><a href="#" class="card-title">Cardio &amp; Strength</a></h3>
+                </div>
+                <p class="card-text">Torch calories and improve cardiovascular health with our high-energy hybrid sessions.</p>
+                <div class="card-progress" aria-label="Class capacity: 70%">
+                  <div class="progress-wrapper">
+                    <span class="progress-label">Class Full</span>
+                    <span class="progress-value" aria-hidden="true">70%</span>
+                  </div>
+                  <div class="progress-bg" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 70%"></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          <li class="scrollbar-item">
+            <article class="class-card">
+              <figure class="card-banner img-holder">
+                <img src="class-3.jpg" width="416" height="240" loading="lazy" alt="Power Yoga class" class="img-cover">
+              </figure>
+              <div class="card-content">
+                <div class="title-wrapper">
+                  <img src="class-icon-3.png" width="44" height="44" aria-hidden="true" alt="" class="title-icon">
+                  <h3 class="h3"><a href="#" class="card-title">Power Yoga</a></h3>
+                </div>
+                <p class="card-text">Increase flexibility, balance and mental clarity through dynamic, flowing yoga flows.</p>
+                <div class="card-progress" aria-label="Class capacity: 90%">
+                  <div class="progress-wrapper">
+                    <span class="progress-label">Class Full</span>
+                    <span class="progress-value" aria-hidden="true">90%</span>
+                  </div>
+                  <div class="progress-bg" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 90%"></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          <li class="scrollbar-item">
+            <article class="class-card">
+              <figure class="card-banner img-holder">
+                <img src="class-icon-4.jpg" width="416" height="240" loading="lazy" alt="The Fitness Pack class" class="img-cover">
+              </figure>
+              <div class="card-content">
+                <div class="title-wrapper">
+                  <img src="class-icon-4 (1).png" width="44" height="44" aria-hidden="true" alt="" class="title-icon">
+                  <h3 class="h3"><a href="#" class="card-title">The Fitness Pack</a></h3>
+                </div>
+                <p class="card-text">A full-body programme combining strength, conditioning, and core stability for all levels.</p>
+                <div class="card-progress" aria-label="Class capacity: 60%">
+                  <div class="progress-wrapper">
+                    <span class="progress-label">Class Full</span>
+                    <span class="progress-value" aria-hidden="true">60%</span>
+                  </div>
+                  <div class="progress-bg" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 60%"></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section class="section blog" id="blog" aria-label="Latest blog posts">
+      <div class="container">
+
+        <p class="section-subtitle">Our News</p>
+        <h2 class="h2 section-title text-center">Latest Blog Feed</h2>
+
+        <ul class="blog-list has-scrollbar" role="list">
+
+          <li class="scrollbar-item">
+            <article class="blog-card">
+              <div class="card-banner img-holder">
+                <img src="blog-1 (1).jpg" width="440" height="270" loading="lazy"
+                  alt="Person entering gym for the first time" class="img-cover">
+                <time class="card-meta" datetime="2022-07-07">7 July 2022</time>
+              </div>
+              <div class="card-content">
+                <a href="#" class="card-title">Going to the gym for the first time</a>
+                <p class="card-text">Everything you need to know before walking through those gym doors for the first time — no experience required.</p>
+                <a href="#" class="btn-link">Read More</a>
+              </div>
+            </article>
+          </li>
+
+          <li class="scrollbar-item">
+            <article class="blog-card">
+              <div class="card-banner img-holder">
+                <img src="blog-2.jpg" width="440" height="270" loading="lazy"
+                  alt="Fitness nutrition guide" class="img-cover">
+                <time class="card-meta" datetime="2022-07-07">7 July 2022</time>
+              </div>
+              <div class="card-content">
+                <a href="#" class="card-title">Fuelling your workouts: a nutrition primer</a>
+                <p class="card-text">Learn what to eat before, during, and after training to maximise performance and speed up recovery.</p>
+                <a href="#" class="btn-link">Read More</a>
+              </div>
+            </article>
+          </li>
+
+          <li class="scrollbar-item">
+            <article class="blog-card">
+              <div class="card-banner img-holder">
+                <img src="blog-3.jpg" width="440" height="270" loading="lazy"
+                  alt="Stretching and recovery" class="img-cover">
+                <time class="card-meta" datetime="2020-07-01">1 July 2020</time>
+              </div>
+              <div class="card-content">
+                <a href="#" class="card-title">Why rest days are your secret weapon</a>
+                <p class="card-text">Rest isn't laziness — it's where the gains happen. Discover why recovery is the most underrated training tool.</p>
+                <a href="#" class="btn-link">Read More</a>
+              </div>
+            </article>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer" id="contact">
+
+    <div class="footer-top">
+      <div class="container">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="#home" class="logo" aria-label="Fit-Life home">
+            <ion-icon name="barbell-sharp" aria-hidden="true"></ion-icon>
+            <span>FitLife</span>
+          </a>
+          <p class="footer-brand-text">
+            Your journey to a stronger, healthier life starts here. Join thousands of members transforming their lives at FitLife.
+          </p>
+          <div class="footer-hours">
+            <img src="footer-clock.png" width="34" height="34" loading="lazy" alt="">
+            <ul>
+              <li>
+                <p class="footer-hours-title">Monday – Friday</p>
+                <p>7:00 AM – 10:00 PM</p>
+              </li>
+              <li>
+                <p class="footer-hours-title">Saturday – Sunday</p>
+                <p>7:00 AM – 9:00 PM</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <nav aria-label="Footer navigation">
+          <p class="footer-list-title">Quick Links</p>
+          <ul>
+            <li><a href="#home"  class="footer-link">Home</a></li>
+            <li><a href="#about" class="footer-link">About Us</a></li>
+            <li><a href="#class" class="footer-link">Classes</a></li>
+            <li><a href="#blog"  class="footer-link">Blog</a></li>
+            <li><a href="#contact" class="footer-link">Contact Us</a></li>
+          </ul>
+        </nav>
+
+        <!-- Contact -->
+        <div>
+          <p class="footer-list-title">Contact Us</p>
+          <ul>
+            <li class="footer-contact-item">
+              <div class="icon" aria-hidden="true">
+                <ion-icon name="location-sharp"></ion-icon>
+              </div>
+              <address>Between BH-5 &amp; 6, Lovely Professional University, Phagwara, Punjab.</address>
+            </li>
+            <li class="footer-contact-item">
+              <div class="icon" aria-hidden="true">
+                <ion-icon name="call-sharp"></ion-icon>
+              </div>
+              <div>
+                <a href="tel:+919032665862" class="footer-link">+91 90326 65862</a>
+                <a href="tel:+916302673567" class="footer-link">+91 63026 73567</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <div class="icon" aria-hidden="true">
+                <ion-icon name="mail-sharp"></ion-icon>
+              </div>
+              <div>
+                <a href="mailto:hello@fitlife.com" class="footer-link">hello@fitlife.com</a>
+                <a href="mailto:services@fitlife.com" class="footer-link">services@fitlife.com</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <p class="footer-list-title">Newsletter</p>
+          <form class="newsletter-form" id="newsletterForm" novalidate>
+            <label for="newsletter-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              class="newsletter-input"
+              placeholder="Email Address"
+              required
+              autocomplete="email"
+            >
+            <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+              <ion-icon name="chevron-forward-sharp" aria-hidden="true"></ion-icon>
+            </button>
+          </form>
+
+          <ul class="social-list" aria-label="Social media links">
+            <li>
+              <a href="https://facebook.com" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com" class="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          &copy; <span id="year"></span> FitLife. All Rights Reserved.
+          Design by <a href="#" class="copyright-link">Quantum</a>.
+        </p>
+        <ul class="footer-bottom-list">
+          <li><a href="#" class="footer-bottom-link">Privacy Policy</a></li>
+          <li><a href="#" class="footer-bottom-link">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <ion-icon name="caret-up-sharp" aria-hidden="true"></ion-icon>
+  </a>
+
+  <!-- =============================================
+       JAVASCRIPT
+  ============================================= -->
+  <script>
+    'use strict';
+
+    /* ---- Helpers ---- */
+    const qs  = (sel, ctx = document) => ctx.querySelector(sel);
+    const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+    /* ---- Elements ---- */
+    const header      = qs('#header');
+    const navbar      = qs('#navbar');
+    const navOverlay  = qs('#navOverlay');
+    const navOpenBtn  = qs('#navOpenBtn');
+    const navCloseBtn = qs('#navCloseBtn');
+    const backToTop   = qs('#backToTop');
+    const navLinks    = qsa('[data-nav-link]');
+    const sections    = navLinks.map(link => qs(link.getAttribute('href'))).filter(Boolean);
+
+    /* ---- Mobile nav ---- */
+    function openNav() {
+      navbar.classList.add('open');
+      navOverlay.classList.add('active');
+      navOpenBtn.setAttribute('aria-expanded', 'true');
+      navCloseBtn.setAttribute('aria-expanded', 'true');
+      navOverlay.removeAttribute('aria-hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      navbar.classList.remove('open');
+      navOverlay.classList.remove('active');
+      navOpenBtn.setAttribute('aria-expanded', 'false');
+      navCloseBtn.setAttribute('aria-expanded', 'false');
+      navOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    navOpenBtn.addEventListener('click', openNav);
+    navCloseBtn.addEventListener('click', closeNav);
+    navOverlay.addEventListener('click', closeNav);
+
+    /* Close nav when a link is clicked (mobile) */
+    navLinks.forEach(link => link.addEventListener('click', closeNav));
+
+    /* Close nav on Escape key */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navbar.classList.contains('open')) closeNav();
+    });
+
+    /* ---- Scroll behaviours ---- */
+    function onScroll() {
+      const scrollY = window.scrollY;
+
+      /* Header shrink */
+      header.classList.toggle('scrolled', scrollY > 50);
+
+      /* Back-to-top visibility */
+      backToTop.classList.toggle('visible', scrollY > 400);
+
+      /* Active nav link highlight */
+      let currentSection = '';
+      sections.forEach(section => {
+        if (section && scrollY >= section.offsetTop - 120) {
+          currentSection = '#' + section.id;
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === currentSection);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ---- Newsletter form ---- */
+    const newsletterForm = qs('#newsletterForm');
+    newsletterForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = newsletterForm.email.value.trim();
+      if (!email) return;
+      /* In production, replace with a real API call */
+      alert(`Thanks! You've subscribed with: ${email}`);
+      newsletterForm.reset();
+    });
+
+    /* ---- Copyright year ---- */
+    qs('#year').textContent = new Date().getFullYear();
+
+    /* ---- Play button (stub — wire to your video modal) ---- */
+    qs('#playBtn').addEventListener('click', () => {
+      /* TODO: open video modal or navigate to video URL */
+      console.info('Play button clicked — connect to your video player here.');
+    });
+  </script>
+
+</body>
+</html>
